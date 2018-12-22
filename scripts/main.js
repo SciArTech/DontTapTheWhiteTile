@@ -113,11 +113,12 @@ var game = {
             if (game.board_1.style.top === "100vh") {
                 setTimeout(function(){
                     game.clearBoard(game.board_1);
-                    
+
                     game.board_1.style.transitionDelay = "-0.2s";
                     game.board_1.style.top = parseInt(game.board_1.style.top) - 200 + "vh";
-                    game.board_1.style.transitionDelay = "0s";
-
+                    setTimeout(function(){
+                        game.board_1.style.transitionDelay = "0s";                        
+                    }, 10);
                     for (var i = 0; i < 4; i++) {
                         if ((game.blocksCount + i + 3) < game.blocksNum || (parseInt(game.board_1.style.top) === -75 && (game.blocksCount + i + 2) < game.blocksNum)) {
                             game.addBlackBlock(game.blocks[i]);
@@ -135,8 +136,9 @@ var game = {
 
                     game.board_2.style.transitionDelay = "-0.2s";                                      
                     game.board_2.style.top = parseInt(game.board_2.style.top) - 200 + "vh";
-                    game.board_2.style.transitionDelay = "0s";
-
+                    setTimeout(function(){
+                        game.board_2.style.transitionDelay = "0s";                        
+                    }, 10);
                     for (var i = 0; i < 4; i++) {
                         if ((game.blocksCount + i + 3) < game.blocksNum || (parseInt(game.board_2.style.top) === -75 && (game.blocksCount + i + 2) < game.blocksNum)) {
                             game.addBlackBlock(game.blocks[i+4]);
