@@ -19,6 +19,7 @@ var game = {
     },
     board_1: null,
     board_2: null,
+    infoBoard: null,
     blocks: [], // 二维数组，保存所有方块
     blocksNum: 25, // 总黑块数
     blocksCount: 0, // 记录消掉的黑块
@@ -113,6 +114,16 @@ var game = {
             }            
 
             game.addEventListenerForLine(game.blocks[(game.blocksCount+1) % 8]);
+        } else {
+            this.classList.add("wrong");
+            for (var i = 0; i < 4; i++) {
+                game.blocks[(game.blocksCount+1) % 8][i].removeEventListener("click", game.clickHandler, false);
+            }
+            setTimeout(function(){
+                game.infoBoard.style.display = "block";
+                document.getElementById("title").firstChild.nodeValue = "经典模式 " + game.blocksNum + "块";
+                document.getElementById("score").firstChild.nodeValue = "失败！";
+            }, 1000);
         }
     },
     // 为一行添加黑块
@@ -140,6 +151,10 @@ var game = {
                 board.childNodes[i].removeChild(board.childNodes[i].firstChild);
             }
         }
+    },
+
+    fail: function() {
+
     }
 };
 
@@ -148,6 +163,7 @@ window.addEventListener("load", function() {
     game.board_2 = document.getElementById("board-2");
 
     game.timer.elem = document.getElementById("timer");
+    game.infoBoard = document.getElementById("info");
 
     game.prepareGame();
 }, false);
