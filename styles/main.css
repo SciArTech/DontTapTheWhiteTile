@@ -38,7 +38,7 @@ body {
   color: #eee;
 
   font-family: sans-serif;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 900;
   line-height: 25vh;
 }
@@ -76,6 +76,9 @@ body {
   border: #eee solid 1px;
   background-color: rgb(23, 160, 45);
 }
+.block.info-block:active {
+  background-color: rgb(40, 170, 50);
+}
 
 .block.wrong {
   background-color: rgb(224, 60, 74);
@@ -86,16 +89,16 @@ body {
   z-index: 10;
 
   width: 100vw;
-  height: 40px;
+  height: 60px;
 
   text-align: center;
 
   color: rgb(218, 55, 55);
 
   font-family: Consolas, sans-serif;
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 900;
-  line-height: 40px;
+  line-height: 60px;
 }
 
 #info {

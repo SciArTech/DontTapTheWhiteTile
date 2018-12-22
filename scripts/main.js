@@ -114,7 +114,9 @@ var game = {
                 setTimeout(function(){
                     game.clearBoard(game.board_1);
                     game.board_1.style.visibility = "hidden";
+                    game.board_1.style.transition = "none";
                     game.board_1.style.top = "-100vh";
+                    game.board_1.style.transition = "top 0.2s";
                     setTimeout(function(){
                         game.board_1.style.visibility = "visible";
                     }, 200);
@@ -133,7 +135,9 @@ var game = {
                 setTimeout(function(){
                     game.clearBoard(game.board_2);
                     game.board_2.style.visibility = "hidden";
+                    game.board_2.style.transition = "none";                    
                     game.board_2.style.top = "-100vh";
+                    game.board_2.style.transition = "top 0.2s";                    
                     setTimeout(function(){
                         game.board_2.style.visibility = "visible";
                     }, 200);
