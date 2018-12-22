@@ -30,10 +30,18 @@ body {
   width: 25vw;
   height: 25vh;
 
-  transition: background-color 0.2s;    border-bottom: solid 1px #333;
+  transition: background-color 0.2s;    
+  border-bottom: solid 1px #333;
   border-left: solid 1px #333;
+  text-align: center;
 
-  }
+  color: #eee;
+
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 25vh;
+}
 
 .block.blackBlock {
   background-color: #333;
@@ -65,16 +73,8 @@ body {
 }
 
 .block.info-block {
-  text-align: center;
-
-  color: #eee;
   border: #eee solid 1px;
   background-color: rgb(23, 160, 45);
-
-  font-family: sans-serif;
-  font-size: 20px;
-  font-weight: 900;
-  line-height: 25vh;
 }
 
 .block.wrong {
@@ -100,7 +100,7 @@ body {
 
 #info {
   position: fixed;
-  /* display: none; */
+  display: none;
   z-index: 11;
 
   width: 100vw;
@@ -149,6 +149,7 @@ body {
 
   font-family: Consolas, sans-serif;
   font-size: 6em;
+  font-weight: 900;
   line-height: 20vh;
 }
 

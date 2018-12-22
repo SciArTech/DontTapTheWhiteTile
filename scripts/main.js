@@ -7,7 +7,7 @@ var game = {
         start: function() {
             this.intervalId = setInterval(function(){
                 game.timer.time += 0.01;
-                game.timer.elem.firstChild.nodeValue = game.timer.time.toFixed(2) + '"';    
+                game.timer.elem.firstChild.nodeValue = game.timer.time.toFixed(2) + '"';
             }, 10);
         },
         stop: function() {
@@ -15,6 +15,7 @@ var game = {
         },
         reset: function() {
             this.time = 0.00;
+            game.timer.elem.firstChild.nodeValue = '0.00"';
         }
     },
     board_1: null,
@@ -26,7 +27,24 @@ var game = {
 
     blocksNumIndex: [25,50,75,100],
 
+    selectHandler: function() {
+        game.blocksNum = game.blocksNumIndex[game.blocks[0].indexOf(this)];
+    },
+    startHandler: function() {
+        game.timer.start();
+    },
     prepareGame: function() {
+        document.body.removeChild(game.board_1);
+        document.body.removeChild(game.board_2);
+        game.board_1 = document.createElement("div");
+        game.board_1.id = "board-1";
+        game.board_1.classList.add("board");
+        game.board_2 = document.createElement("div");
+        game.board_2.id = "board-2";
+        game.board_2.classList.add("board");        
+        document.body.appendChild(game.board_1);
+        document.body.appendChild(game.board_2);
+        
         // 创建方块
         for (var i = 0; i < 8; i++) {
             game.blocks[i] = [];
@@ -50,9 +68,7 @@ var game = {
             if (i === 0) {
                 for (var a = 0; a < 4; a++) {
                     game.blocks[i][a].classList.add("info-block");
-                    game.blocks[i][a].addEventListener("click", function(){
-                        game.blocksNum = game.blocksNumIndex[game.blocks[0].indexOf(this)];
-                    }, false);
+                    game.blocks[i][a].addEventListener("click", game.selectHandler, false);
 
                     var text = document.createTextNode(game.blocksNumIndex[a]);
                     game.blocks[i][a].appendChild(text);
@@ -61,7 +77,15 @@ var game = {
                 game.addBlackBlock(game.blocks[i]);
             }
         }
+        var firstBlackBlock = game.board_1.getElementsByClassName("blackBlock")[0];
+        firstBlackBlock.appendChild(document.createTextNode("开始"));
+        firstBlackBlock.addEventListener("click", game.startHandler, false);
+
         game.addEventListenerForLine(game.blocks[1]);
+
+        game.timer.reset();
+        game.blocksCount = 0;
+        game.infoBoard.style.display = "none";
     },
 
     clickHandler: function() {
@@ -78,42 +102,64 @@ var game = {
                 this.style.zIndex = "0";
             }
             for (var i = 0; i < 4; i++) {
-                game.blocks[(game.blocksCount+1) % 8][i].removeEventListener("click", game.clickHandler, false);                        
+                game.blocks[(game.blocksCount+1) % 8][i].removeEventListener("click", game.clickHandler, false);
             }
 
             game.blocksCount++;
 
             game.board_1.style.top = parseInt(game.board_1.style.top || 0) + 25 + "vh";
             game.board_2.style.top = parseInt(game.board_2.style.top || -100) + 25 + "vh";
-            
+
             if (game.board_1.style.top === "100vh") {
                 setTimeout(function(){
                     game.clearBoard(game.board_1);
                     game.board_1.style.visibility = "hidden";
                     game.board_1.style.top = "-100vh";
                     setTimeout(function(){
-                        game.board_1.style.visibility = "visible";                        
+                        game.board_1.style.visibility = "visible";
                     }, 200);
                     for (var i = 0; i < 4; i++) {
-                        game.addBlackBlock(game.blocks[i]);
-                    }    
+                        if ((game.blocksCount + i + 3) < game.blocksNum) {
+                            game.addBlackBlock(game.blocks[i]);
+                        } else {
+                            for (var j = 0; j < 4; j++) {
+                                game.blocks[i][j].classList.add("info-block");
+                            }
+                        }
+                    }
                 }, 200);
             }
             if (game.board_2.style.top === "100vh") {
                 setTimeout(function(){
                     game.clearBoard(game.board_2);
-                    game.board_2.style.visibility = "hidden";                    
+                    game.board_2.style.visibility = "hidden";
                     game.board_2.style.top = "-100vh";
                     setTimeout(function(){
-                        game.board_2.style.visibility = "visible";                        
+                        game.board_2.style.visibility = "visible";
                     }, 200);
                     for (var i = 0; i < 4; i++) {
-                        game.addBlackBlock(game.blocks[i+4]);
+                        if ((game.blocksCount + i + 3) < game.blocksNum) {
+                            game.addBlackBlock(game.blocks[i+4]);
+                        } else {
+                            for (var j = 0; j < 4; j++) {
+                                game.blocks[i+4][j].classList.add("info-block");
+                            }
+                        }
                     }
                 }, 200);
-            }            
-
-            game.addEventListenerForLine(game.blocks[(game.blocksCount+1) % 8]);
+            }
+            if (game.blocksCount < game.blocksNum) {
+                game.addEventListenerForLine(game.blocks[(game.blocksCount+1) % 8]);
+            } else {
+                game.board_1.style.top = parseInt(game.board_1.style.top || 0) + 25 + "vh";
+                game.board_2.style.top = parseInt(game.board_2.style.top || -100) + 25 + "vh";
+                setTimeout(function(){
+                    game.infoBoard.style.display = "block";
+                    document.getElementById("title").firstChild.nodeValue = "经典模式 " + game.blocksNum + "块";
+                    document.getElementById("score").firstChild.nodeValue = game.timer.elem.firstChild.nodeValue;
+                    game.timer.stop();
+                }, 400);
+            }
         } else {
             this.classList.add("wrong");
             for (var i = 0; i < 4; i++) {
@@ -122,7 +168,8 @@ var game = {
             setTimeout(function(){
                 game.infoBoard.style.display = "block";
                 document.getElementById("title").firstChild.nodeValue = "经典模式 " + game.blocksNum + "块";
-                document.getElementById("score").firstChild.nodeValue = "失败！";
+                document.getElementById("score").firstChild.nodeValue = "失败";
+                game.timer.stop();
             }, 1000);
         }
     },
@@ -149,13 +196,11 @@ var game = {
             board.childNodes[i].classList.remove("info-block");
             if (board.childNodes[i].childNodes.length) {
                 board.childNodes[i].removeChild(board.childNodes[i].firstChild);
+                board.childNodes[i].removeEventListener("click", game.startHandler, false);
+                board.childNodes[i].removeEventListener("click", game.selectHandler, false);
             }
         }
     },
-
-    fail: function() {
-
-    }
 };
 
 window.addEventListener("load", function() {
@@ -164,6 +209,9 @@ window.addEventListener("load", function() {
 
     game.timer.elem = document.getElementById("timer");
     game.infoBoard = document.getElementById("info");
+    document.getElementById("replay").addEventListener("click", function(){
+        game.prepareGame();
+    }, false);
 
     game.prepareGame();
 }, false);
