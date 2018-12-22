@@ -121,7 +121,7 @@ var game = {
                         game.board_1.style.visibility = "visible";
                     }, 200);
                     for (var i = 0; i < 4; i++) {
-                        if ((game.blocksCount + i + 3) < game.blocksNum || (game.board_1.style.top === "-75vh" && (game.blocksCount + i + 2) < game.blocksNum)) {
+                        if ((game.blocksCount + i + 3) < game.blocksNum || (parseInt(game.board_1.style.top) === -75 && (game.blocksCount + i + 2) < game.blocksNum)) {
                             game.addBlackBlock(game.blocks[i]);
                         } else {
                             for (var j = 0; j < 4; j++) {
@@ -142,7 +142,7 @@ var game = {
                         game.board_2.style.visibility = "visible";
                     }, 200);
                     for (var i = 0; i < 4; i++) {
-                        if ((game.blocksCount + i + 3) < game.blocksNum || (game.board_2.style.top === "-75vh" && (game.blocksCount + i + 2) < game.blocksNum)) {
+                        if ((game.blocksCount + i + 3) < game.blocksNum || (parseInt(game.board_2.style.top) === -75 && (game.blocksCount + i + 2) < game.blocksNum)) {
                             game.addBlackBlock(game.blocks[i+4]);
                         } else {
                             for (var j = 0; j < 4; j++) {
