@@ -115,7 +115,7 @@ var game = {
                     game.clearBoard(game.board_1);
                     game.board_1.style.visibility = "hidden";
                     game.board_1.style.transition = "none";
-                    game.board_1.style.top = "-100vh";
+                    game.board_1.style.top = parseInt(game.board_1.style.top) - 200 + "vh";
                     game.board_1.style.transition = "top 0.2s";
                     setTimeout(function(){
                         game.board_1.style.visibility = "visible";
@@ -136,7 +136,7 @@ var game = {
                     game.clearBoard(game.board_2);
                     game.board_2.style.visibility = "hidden";
                     game.board_2.style.transition = "none";                    
-                    game.board_2.style.top = "-100vh";
+                    game.board_2.style.top = parseInt(game.board_2.style.top) - 200 + "vh";
                     game.board_2.style.transition = "top 0.2s";                    
                     setTimeout(function(){
                         game.board_2.style.visibility = "visible";
