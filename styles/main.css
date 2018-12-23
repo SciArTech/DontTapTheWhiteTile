@@ -9,7 +9,7 @@ body {
   width: 100vw;
   height: 100vh;
 
-  transition: top 0.2s;
+  transition: top 0.1s;
 }
 
 #board-1 {
@@ -30,7 +30,7 @@ body {
   width: 25vw;
   height: 25vh;
 
-  transition: background-color 0.2s;    
+  transition: background-color 0.15s;    
   border-bottom: solid 1px #333;
   border-left: solid 1px #333;
   text-align: center;

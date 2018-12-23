@@ -114,7 +114,7 @@ var game = {
                 setTimeout(function(){
                     game.clearBoard(game.board_1);
 
-                    game.board_1.style.transitionDelay = "-0.2s";
+                    game.board_1.style.transitionDelay = "-0.1s";
                     game.board_1.style.top = parseInt(game.board_1.style.top) - 200 + "vh";
                     setTimeout(function(){
                         game.board_1.style.transitionDelay = "0s";                        
@@ -128,13 +128,13 @@ var game = {
                             }
                         }
                     }
-                }, 200);
+                }, 100);
             }
             if (game.board_2.style.top === "100vh") {
                 setTimeout(function(){
                     game.clearBoard(game.board_2);
 
-                    game.board_2.style.transitionDelay = "-0.2s";                                      
+                    game.board_2.style.transitionDelay = "-0.1s";                                      
                     game.board_2.style.top = parseInt(game.board_2.style.top) - 200 + "vh";
                     setTimeout(function(){
                         game.board_2.style.transitionDelay = "0s";                        
@@ -148,7 +148,7 @@ var game = {
                             }
                         }
                     }
-                }, 200);
+                }, 100);
             }
             if (game.blocksCount < game.blocksNum) {
                 game.addEventListenerForLine(game.blocks[(game.blocksCount+1) % 8]);
@@ -160,7 +160,7 @@ var game = {
                     document.getElementById("title").firstChild.nodeValue = "经典模式 " + game.blocksNum + "块";
                     document.getElementById("score").firstChild.nodeValue = game.timer.elem.firstChild.nodeValue;
                     game.timer.stop();
-                }, 400);
+                }, 200);
             }
         } else {
             this.classList.add("wrong");
