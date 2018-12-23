@@ -31,17 +31,17 @@ body {
   height: 25vh;
 
   transition: background-color 0.15s;    
-  border-bottom: solid 1px #333;
-  border-left: solid 1px #333;
   text-align: center;
 
-  color: #eee;
+  color: #eee;    
+  border-bottom: solid 1px #333;
+  border-left: solid 1px #333;
 
   font-family: sans-serif;
   font-size: 25px;
   font-weight: 900;
   line-height: 25vh;
-}
+  }
 
 .block.blackBlock {
   background-color: #333;
@@ -101,10 +101,23 @@ body {
   line-height: 60px;
 }
 
+#progress-bar {
+  position: fixed;
+  z-index: 10;
+
+  width: 0;
+  height: 1vh;
+
+  transition: width 0.3s;
+
+  background-color: rgb(40, 170, 50);
+}
+
 #info {
   position: fixed;
-  display: none;
   z-index: 11;
+
+  display: none;
 
   width: 100vw;
   height: 100vh;
@@ -174,10 +187,13 @@ body {
 #footer {
   position: absolute;
   bottom: 0;
+
   width: 100vw;
   height: 5vh;
-  line-height: 5vh;
+
+  background-color: rgba(0,30,0,0.07);
+
   font-family: sans-serif;
   font-size: 1em;
-  background-color: rgba(0,30,0,0.07);
+  line-height: 5vh;
 }

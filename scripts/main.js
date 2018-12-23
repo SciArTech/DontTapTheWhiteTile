@@ -85,6 +85,7 @@ var game = {
 
         game.timer.reset();
         game.blocksCount = 0;
+        document.getElementById("progress-bar").style.width = "0";
         game.infoBoard.style.display = "none";
     },
 
@@ -106,6 +107,7 @@ var game = {
             }
 
             game.blocksCount++;
+            document.getElementById("progress-bar").style.width = (game.blocksCount / game.blocksNum) * 100 + "vw";            
 
             game.board_1.style.top = parseInt(game.board_1.style.top || 0) + 25 + "vh";
             game.board_2.style.top = parseInt(game.board_2.style.top || -100) + 25 + "vh";
